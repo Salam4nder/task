@@ -1,7 +1,10 @@
 package todo
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
+	"os"
 	"time"
 )
 
@@ -36,8 +39,7 @@ func (tl *List) Remove(idx int) error {
 	if idx < 0 || idx > len(l)-1 {
 		return errors.New("index out of bounds")
 	}
-	// Order is important. Split the slice into two and join them together
-	// except the value at index.
+	// Order is important. Split the slice into two and join them together, but leave out the value at index.
 	*tl = append(l[:idx], l[idx+1:]...)
 	return nil
 }
@@ -49,18 +51,58 @@ func (tl *List) RemoveAllCompleted() error {
 		if (*tl)[idx].Done == true {
 			err := tl.Remove(idx)
 			if err != nil {
-				return errors.New("index out of bounds")
+				return err
 			}
 		}
 	}
 	return nil
 }
 
-// Complete a Task by filling in the CompletedAt date. Returns an error if index outside of bound.
+// Complete a Task by filling in the CompletedAt date. Returns an error if index outside of bounds.
 func (tl *List) Complete(idx int) error {
-	if idx < 0 || idx > len(*t)-1 {
+	if idx < 0 || idx > len(*tl)-1 {
 		return errors.New("index out of bounds")
 	}
 	(*tl)[idx].CompletedAt = time.Now()
 	return nil
+}
+
+// Write will marshal the List to a json format and write it to a file named fileName.
+func (tl *List) Write(fileName string) error {
+	if fileName == "" {
+		return errors.New("file name can't be empty")
+	}
+	if len(*tl) <= 0 {
+		return errors.New("list of todos are empty")
+	}
+	data, err := json.Marshal(*tl)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(fileName, data, 0644)
+}
+
+// Load will read the file fileName, unmarshal it from json to data and populate List with the contents.
+func (tl *List) Load(fileName string) error {
+	if fileName == "" {
+		return errors.New("file name can't be empty")
+	}
+	if len(*tl) <= 0 {
+		return errors.New("list of todos are empty")
+	}
+	data, err := os.ReadFile(fileName)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(data, tl)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (tl *List) Print() {
+	for idx, val := range *tl {
+		fmt.Println(idx, val)
+	}
 }
