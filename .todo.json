@@ -16,11 +16,5 @@
 "Done": false,
 "CreatedAt": "2022-07-03T22:00:57.236635+02:00",
 "CompletedAt": "0001-01-01T00:00:00Z"
-},
-{
-"Task": "sixth",
-"Done": false,
-"CreatedAt": "2022-07-03T22:08:52.239646+02:00",
-"CompletedAt": "0001-01-01T00:00:00Z"
 }
 ]

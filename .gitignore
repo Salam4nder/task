@@ -1,2 +1,4 @@
 .todo.json
 todo
+.gitignore
+.idea
