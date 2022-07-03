@@ -70,12 +70,10 @@ func (tl *List) Complete(idx int) error {
 }
 
 // Write will marshal the List to a json format and write it to a file named fileName.
+// Returns an error if fileName is empty, if the List is empty or if the marshalling fails.
 func (tl *List) Write(fileName string) error {
 	if fileName == "" {
 		return errors.New("file name can't be empty")
-	}
-	if len(*tl) <= 0 {
-		return errors.New("list of todos are empty")
 	}
 	data, err := json.MarshalIndent(*tl, "", "")
 	if err != nil {
@@ -85,6 +83,7 @@ func (tl *List) Write(fileName string) error {
 }
 
 // Load will read the file fileName, unmarshal it from json to data and populate List with the contents.
+// Returns an error if it fails to read the file or fails to unmarshal.
 func (tl *List) Load(fileName string) error {
 	if fileName == "" {
 		return errors.New("file name can't be empty")
@@ -97,13 +96,13 @@ func (tl *List) Load(fileName string) error {
 	if err != nil {
 		return err
 	}
-	if len(*tl) <= 0 {
-		return errors.New("list of todos are empty")
-	}
 	return nil
 }
 
 func (tl *List) Print() {
+	if len(*tl) <= 0 {
+		fmt.Println("Your list of todos are empty. Try adding one with the add command.")
+	}
 	for idx, val := range *tl {
 		fmt.Printf("%d, %v\n", idx, *val)
 	}
