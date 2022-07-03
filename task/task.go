@@ -58,12 +58,14 @@ func (tl *List) RemoveAllCompleted() error {
 	return nil
 }
 
-// Complete a Task by filling in the CompletedAt date. Returns an error if index outside of bounds.
+// Complete a Task by filling in the CompletedAt date and setting Done boolean to True.
+// Returns an error if index outside of bounds.
 func (tl *List) Complete(idx int) error {
 	if idx < 0 || idx > len(*tl)-1 {
 		return errors.New("index out of bounds")
 	}
 	(*tl)[idx].CompletedAt = time.Now()
+	(*tl)[idx].Done = true
 	return nil
 }
 
