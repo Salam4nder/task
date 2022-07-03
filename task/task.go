@@ -37,7 +37,8 @@ func (tl *List) Remove(idx int) error {
 	// Assignment is used for easier syntax when splitting the slice.
 	l := *tl
 	if idx < 0 || idx > len(l)-1 {
-		return errors.New("index out of bounds")
+		return errors.New("entry does not exist, try listing your list with the ls command to see the " +
+			"entries")
 	}
 	// Order is important. Split the slice into two and join them together, but leave out the value at index.
 	*tl = append(l[:idx], l[idx+1:]...)

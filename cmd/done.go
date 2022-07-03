@@ -7,20 +7,20 @@ import (
 	"strings"
 )
 
-// delCmd represents the del command
-var delCmd = &cobra.Command{
-	Use:   "rm",
-	Short: "Delete a task from the todo list.",
-	Long:  "Delete a task from the todo list.",
+// doneCmd represents the done command
+var doneCmd = &cobra.Command{
+	Use:   "done",
+	Short: "Mark a task complete",
+	Long:  "Mark a task complete",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Join the args arguments to a single string.
 		arg := strings.Join(args, "")
 		// Try and convert the string to a number
 		num, err := strconv.Atoi(arg)
 		if err != nil {
-			log.Fatal("Failed to read a number ")
+			log.Fatal("Failed to read a number")
 		}
-		err = TodoList.Remove(num)
+		err = TodoList.Complete(num)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -32,5 +32,5 @@ var delCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(delCmd)
+	rootCmd.AddCommand(doneCmd)
 }
