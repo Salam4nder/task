@@ -70,8 +70,18 @@ func (tl *List) Complete(idx int) error {
 	return nil
 }
 
+// Clear clears the whole List, even tasks that aren't done. Returns an error if List is already
+// empty.
+func (tl *List) Clear() error {
+	if len(*tl) <= 0 {
+		return errors.New("list is already empty")
+	}
+	*tl = (*tl)[:0]
+	return nil
+}
+
 // Write will marshal the List to a json format and write it to a file named fileName.
-// Returns an error if fileName is empty, if the List is empty or if the marshalling fails.
+// Returns an error if fileName is empty or if the marshalling fails.
 func (tl *List) Write(fileName string) error {
 	if fileName == "" {
 		return errors.New("file name can't be empty")

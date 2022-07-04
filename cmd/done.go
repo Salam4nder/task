@@ -24,7 +24,7 @@ var doneCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = TodoList.Write(".todo.json")
+		err = TodoList.Write(FileName)
 		if err != nil {
 			log.Fatal(err)
 		}
