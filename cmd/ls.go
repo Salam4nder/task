@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/Salam4nder/todo/task"
 	"github.com/spf13/cobra"
 )
 
@@ -10,7 +11,7 @@ var lsCmd = &cobra.Command{
 	Short: "List all todos",
 	Long:  "List all todos",
 	Run: func(cmd *cobra.Command, args []string) {
-		TodoList.Print()
+		task.TodoList.Print()
 	},
 }
 

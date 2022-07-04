@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"github.com/Salam4nder/todo/task"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -12,8 +11,6 @@ var rootCmd = &cobra.Command{
 	Short: "Command line todo app",
 	Long:  "Command line todo app",
 }
-var TodoList *task.List
-var FileName = ".todo.json"
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.

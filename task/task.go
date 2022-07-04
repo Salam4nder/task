@@ -14,8 +14,11 @@ type Task struct {
 	CreatedAt   time.Time
 	CompletedAt time.Time
 }
-
 type List []*Task
+
+var TodoList *List
+
+const FileName = ".todo.json"
 
 // Add a Task to the List of Tasks. If Task is an empty string return an error.
 func (tl *List) Add(todo string) error {

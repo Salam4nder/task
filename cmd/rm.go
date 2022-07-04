@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/Salam4nder/todo/task"
 	"github.com/spf13/cobra"
 	"log"
 	"strconv"
@@ -20,11 +21,11 @@ var delCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal("Failed to read a number ")
 		}
-		err = TodoList.Remove(num)
+		err = task.TodoList.Remove(num)
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = TodoList.Write(FileName)
+		err = task.TodoList.Write(task.FileName)
 		if err != nil {
 			log.Fatal(err)
 		}

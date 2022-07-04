@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/Salam4nder/todo/task"
 	"log"
 	"strings"
 
@@ -13,11 +14,11 @@ var addCmd = &cobra.Command{
 	Short: "Add a task to the todo list.",
 	Long:  "Add a task to the todo list.",
 	Run: func(cmd *cobra.Command, args []string) {
-		err := TodoList.Add(strings.Join(args, " "))
+		err := task.TodoList.Add(strings.Join(args, " "))
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = TodoList.Write(FileName)
+		err = task.TodoList.Write(task.FileName)
 		if err != nil {
 			log.Fatal(err)
 		}
