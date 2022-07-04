@@ -11,8 +11,8 @@ import (
 // delCmd represents the del command
 var delCmd = &cobra.Command{
 	Use:   "rm",
-	Short: "Delete a task from the todo list.",
-	Long:  "Delete a task from the todo list.",
+	Short: "Delete a task from the todo list",
+	Long:  "Delete a task from the todo list",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Join the args arguments to a single string.
 		arg := strings.Join(args, "")
