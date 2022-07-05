@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/alexeyco/simpletable"
 	"os"
 	"time"
 )
@@ -119,7 +120,26 @@ func (tl *List) Print() {
 	if len(*tl) <= 0 {
 		fmt.Println("Your list of todos are empty. Try adding one with the add command.")
 	}
-	for idx, val := range *tl {
-		fmt.Printf("%d, %v\n", idx, *val)
+	table := simpletable.New()
+	table.Header = &simpletable.Header{
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: "#"},
+			{Align: simpletable.AlignCenter, Text: "Task"},
+			{Align: simpletable.AlignCenter, Text: "Done?"},
+			{Align: simpletable.AlignCenter, Text: "Created"},
+			{Align: simpletable.AlignCenter, Text: "Completed"},
+		},
 	}
+	for idx, item := range *tl {
+		c := []*simpletable.Cell{
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
+			{Text: fmt.Sprintf("%s", item.Task)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.Done)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CompletedAt)},
+		}
+		table.Body.Cells = append(table.Body.Cells, c)
+	}
+	table.SetStyle(simpletable.StyleUnicode)
+	fmt.Println(table.String())
 }
