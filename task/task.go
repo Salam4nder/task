@@ -51,9 +51,11 @@ func (tl *List) Remove(idx int) error {
 // RemoveAllCompleted checks the List for completed Tasks and removes them from the List. Returns an error if index
 // is out of bounds.
 func (tl *List) RemoveAllCompleted() error {
-	for idx := range *tl {
+	for idx := 0; idx <= len(*tl)-1; idx++ {
 		if (*tl)[idx].Done == true {
-			err := tl.Remove(idx)
+			err := (*tl).Remove(idx)
+			// Since Remove() moves up the indexes of the remaining elements by 1, I need to decrease the idx.
+			idx--
 			if err != nil {
 				return err
 			}
