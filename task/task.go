@@ -131,14 +131,27 @@ func (tl *List) Print() {
 		},
 	}
 	for idx, item := range *tl {
-		c := []*simpletable.Cell{
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
-			{Text: fmt.Sprintf("%s", item.Task)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.Done)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CompletedAt)},
+		// If task isn't completed, I don't want to print out the completion date.
+		if item.CompletedAt.Year() == 001 {
+			c := []*simpletable.Cell{
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
+				{Text: fmt.Sprintf("%s", item.Task)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.Done)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
+				{Align: simpletable.AlignCenter, Text: "-"},
+			}
+			table.Body.Cells = append(table.Body.Cells, c)
+
+		} else {
+			c := []*simpletable.Cell{
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
+				{Text: fmt.Sprintf("%s", item.Task)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.Done)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CompletedAt.Format(time.ANSIC))},
+			}
+			table.Body.Cells = append(table.Body.Cells, c)
 		}
-		table.Body.Cells = append(table.Body.Cells, c)
 	}
 	table.SetStyle(simpletable.StyleUnicode)
 	fmt.Println(table.String())
