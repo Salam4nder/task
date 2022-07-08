@@ -24,9 +24,11 @@ todo done <number> // Marks a task with the given index as done
 todo ref // Refreshes the list by removing tasks that are marked done
 todo rm <number> // Removes task with given index from the list
 todo clear // Removes all tasks from the list
+
+todo add --help // if you need additional info
 ```
 
 # Todo (haha):
 
-* Update the available commands print, as some won't work fully (for example help)
+* Figure out a way to be able to add todos with special characters. For example " ' "
 * Make is fancier?
