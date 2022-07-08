@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/alexeyco/simpletable"
-	"github.com/ttacon/chalk"
 	"os"
 	"time"
+
+	"github.com/alexeyco/simpletable"
+	"github.com/ttacon/chalk"
 )
 
 type Task struct {
@@ -137,7 +138,7 @@ func (tl *List) Print() {
 			c := []*simpletable.Cell{
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
 				{Text: fmt.Sprintf("%s", item.Task)},
-				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Red.Color("%v"), item.Done)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Red.Color("%v"), "No")},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
 				{Align: simpletable.AlignCenter, Text: "-"},
 			}
@@ -147,7 +148,7 @@ func (tl *List) Print() {
 			c := []*simpletable.Cell{
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
 				{Text: fmt.Sprintf("%s", item.Task)},
-				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Green.Color("%v"), item.Done)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Green.Color("%v"), "Yes")},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CompletedAt.Format(time.ANSIC))},
 			}
