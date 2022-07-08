@@ -17,7 +17,7 @@ go install github.com/Salam4nder/TodoCli
 <img width="1240" alt="Screen Shot 2022-07-08 at 13 57 59 PM" src="https://user-images.githubusercontent.com/89915813/177987826-16cf33fc-edee-4a67-ac98-fdeabc1c2815.png">
 
 
-```zsh
+```
 todo add <task> // Adds a task to the list
 todo ls // List all tasks in the list
 todo done <number> // Marks a task with the given index as done
