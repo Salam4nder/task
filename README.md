@@ -31,4 +31,4 @@ todo add --help // if you need additional info
 # Todo (haha):
 
 * Figure out a way to be able to add todos with special characters. For example " ' "
-* Make is fancier?
+* Make the UI fancier?
