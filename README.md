@@ -2,6 +2,7 @@
 
 >Simple Todo app that lives in your terminal.
 
+https://user-images.githubusercontent.com/89915813/177986715-b38ace24-7c87-4c16-8b27-ed9283731d93.mov
 
 # Install
 
@@ -11,5 +12,20 @@ go install github.com/Salam4nder/TodoCli
 
 # Usage
 
-`todo ls`
-[![asciicast](https://asciinema.org/a/dheVxy39SkHM0Ip4eq3NvmmQh.svg)](https://asciinema.org/a/dheVxy39SkHM0Ip4eq3NvmmQh)
+## Commands
+
+<img width="1240" alt="Screen Shot 2022-07-08 at 13 57 59 PM" src="https://user-images.githubusercontent.com/89915813/177987826-16cf33fc-edee-4a67-ac98-fdeabc1c2815.png">
+
+
+```zsh
+todo add <task> // Adds a task to the list
+todo ls // List all tasks in the list
+todo ref // Refreshes the list by removing tasks that are marked done
+todo rm <number> // Removes task with given index from the list
+todo clear // Removes all tasks from the list
+```
+
+# Todo (haha):
+
+* Update the available commands print, as some won't work fully (for example help)
+* Make is fancier?
