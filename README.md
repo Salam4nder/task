@@ -2,7 +2,8 @@
 
 >Simple Todo app that lives in your terminal.
 
-https://user-images.githubusercontent.com/89915813/177986715-b38ace24-7c87-4c16-8b27-ed9283731d93.mov
+https://user-images.githubusercontent.com/89915813/183265571-657e3b76-a7e1-471c-a490-a360d1906489.mov
+
 
 # Install
 
