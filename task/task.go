@@ -141,7 +141,6 @@ func (tl *List) Print() {
 		},
 	}
 	for idx, item := range *tl {
-		// If task isn't completed, I don't want to print out the completion date.
 		if !item.Done {
 			c := []*simpletable.Cell{
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
@@ -185,6 +184,7 @@ func (tl *List) PrintWithDate() {
 				{Text: fmt.Sprintf("%s", item.Task)},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Red.Color("%v"), "No")},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", " - ")},
 			}
 			table.Body.Cells = append(table.Body.Cells, c)
 
