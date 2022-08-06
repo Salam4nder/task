@@ -128,13 +128,47 @@ func (tl *List) Print() {
 			{Align: simpletable.AlignCenter, Text: "#"},
 			{Align: simpletable.AlignCenter, Text: "Task"},
 			{Align: simpletable.AlignCenter, Text: "Done?"},
+		},
+	}
+	for idx, item := range *tl {
+		// If task isn't completed, I don't want to print out the completion date.
+		if item.Done == true {
+			c := []*simpletable.Cell{
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
+				{Text: fmt.Sprintf("%s", item.Task)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Red.Color("%v"), "No")},
+			}
+			table.Body.Cells = append(table.Body.Cells, c)
+
+		} else {
+			c := []*simpletable.Cell{
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
+				{Text: fmt.Sprintf("%s", item.Task)},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Green.Color("%v"), "Yes")},
+			}
+			table.Body.Cells = append(table.Body.Cells, c)
+		}
+	}
+	table.SetStyle(simpletable.StyleUnicode)
+	fmt.Println(table.String())
+}
+func (tl *List) PrintWithDate() {
+	if len(*tl) <= 0 {
+		fmt.Println("Your list of todos are empty. Try adding one with the add command.")
+	}
+	table := simpletable.New()
+	table.Header = &simpletable.Header{
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: "#"},
+			{Align: simpletable.AlignCenter, Text: "Task"},
+			{Align: simpletable.AlignCenter, Text: "Done?"},
 			{Align: simpletable.AlignCenter, Text: "Created"},
 			{Align: simpletable.AlignCenter, Text: "Completed"},
 		},
 	}
 	for idx, item := range *tl {
 		// If task isn't completed, I don't want to print out the completion date.
-		if item.CompletedAt.Year() == 001 {
+		if item.Done == true {
 			c := []*simpletable.Cell{
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
 				{Text: fmt.Sprintf("%s", item.Task)},
@@ -150,7 +184,6 @@ func (tl *List) Print() {
 				{Text: fmt.Sprintf("%s", item.Task)},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Green.Color("%v"), "Yes")},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
-				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CompletedAt.Format(time.ANSIC))},
 			}
 			table.Body.Cells = append(table.Body.Cells, c)
 		}
