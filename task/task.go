@@ -98,7 +98,12 @@ func (tl *List) Write(fileName string) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(fileName, data, 0644)
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return err
+	}
+	path := fmt.Sprintf("%s/%s", homeDir, fileName)
+	return os.WriteFile(path, data, 0644)
 }
 
 // Load will read the file fileName, unmarshal it from json to data and populate List with the contents.
@@ -107,7 +112,12 @@ func (tl *List) Load(fileName string) error {
 	if fileName == "" {
 		return errors.New("file name can't be empty")
 	}
-	data, err := os.ReadFile(fileName)
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return err
+	}
+	path := fmt.Sprintf("%s/%s", homeDir, fileName)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
@@ -132,7 +142,7 @@ func (tl *List) Print() {
 	}
 	for idx, item := range *tl {
 		// If task isn't completed, I don't want to print out the completion date.
-		if item.Done == true {
+		if !item.Done {
 			c := []*simpletable.Cell{
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
 				{Text: fmt.Sprintf("%s", item.Task)},
@@ -152,6 +162,7 @@ func (tl *List) Print() {
 	table.SetStyle(simpletable.StyleUnicode)
 	fmt.Println(table.String())
 }
+
 func (tl *List) PrintWithDate() {
 	if len(*tl) <= 0 {
 		fmt.Println("Your list of todos are empty. Try adding one with the add command.")
@@ -168,13 +179,12 @@ func (tl *List) PrintWithDate() {
 	}
 	for idx, item := range *tl {
 		// If task isn't completed, I don't want to print out the completion date.
-		if item.Done == true {
+		if !item.Done {
 			c := []*simpletable.Cell{
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d", idx)},
 				{Text: fmt.Sprintf("%s", item.Task)},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Red.Color("%v"), "No")},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
-				{Align: simpletable.AlignCenter, Text: "-"},
 			}
 			table.Body.Cells = append(table.Body.Cells, c)
 
@@ -184,6 +194,7 @@ func (tl *List) PrintWithDate() {
 				{Text: fmt.Sprintf("%s", item.Task)},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf(chalk.Green.Color("%v"), "Yes")},
 				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CreatedAt.Format(time.ANSIC))},
+				{Align: simpletable.AlignRight, Text: fmt.Sprintf("%v", item.CompletedAt.Format(time.ANSIC))},
 			}
 			table.Body.Cells = append(table.Body.Cells, c)
 		}

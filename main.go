@@ -17,5 +17,9 @@ func init() {
 	if err != nil {
 		// If the app is run for the first time, a json file to store the todos is created.
 		_ = task.TodoList.Add("I am a sample todo. Delete me with the rm command: todo rm 0")
+		err = task.TodoList.Write(task.FileName)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
