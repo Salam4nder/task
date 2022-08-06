@@ -15,8 +15,7 @@ go install github.com/Salam4nder/TodoCli
 
 ## Commands
 
-<img width="1240" alt="Screen Shot 2022-07-08 at 13 57 59 PM" src="https://user-images.githubusercontent.com/89915813/177987826-16cf33fc-edee-4a67-ac98-fdeabc1c2815.png">
-
+<img width="1000" alt="Screen Shot 2022-08-06 at 22 52 43 PM" src="https://user-images.githubusercontent.com/89915813/183265683-749a2082-4cf6-4415-84a1-e621e20fadfb.png">
 
 ```
 todo add <task> // Adds a task to the list
