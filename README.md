@@ -8,7 +8,7 @@ https://user-images.githubusercontent.com/89915813/183265571-657e3b76-a7e1-471c-
 # Install
 
 ```zsh 
-go install github.com/Salam4nder/TodoCli
+go install github.com/Salam4nder/task
 ```
 
 # Usage
